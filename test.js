@@ -3,7 +3,7 @@
 
 // Initialize some useful stuff:
 var fs = require('fs');    // Node file IO lib, http://nodejs.org/api/fs.html
-var data, lines;
+var data;
 var ready = false;
 var smallest = 9999, largest = 0;
 var num_small = num_large = 0;
@@ -13,12 +13,12 @@ fs.readFile('weather.dat', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
-  lines = data.split('\n');
-  show();
+  var lines = data.split('\n');
+  show(lines);
   return;
 });
 
-function show () {
+function show (lines) {
   console.log('\nLines read from data file: ' + lines.length);
   for (var i = 2; i < lines.length-1; i++) {    // Loop through all lines, skipping header and blank line
     var vals = lines[i].trim().split(/\s+/);    // divide fields on one or more spaces

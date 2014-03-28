@@ -21,11 +21,11 @@ fs.readFile('weather.dat', 'utf8', function (err,data) {
 function show () {
   console.log('\nLines read from data file: ' + lines.length);
   for (var i = 2; i < lines.length-1; i++) {    // Loop through all lines, skipping header and blank line
-  	var vals = lines[i].trim().split(/\s+/);    // divide fields on one or more spaces
+    var vals = lines[i].trim().split(/\s+/);    // divide fields on one or more spaces
     high = vals[1].replace (/[!@#$%^&*]/g, ''); // get high temp, cleaning any strange chars
     low = vals[2].replace (/[!@#$%^&*]/g, '');  // get low temp
 
-  	//console.log (vals[0] + ',' + high + ',' + low);
+    //console.log (vals[0] + ',' + high + ',' + low);
     var diff = parseInt(high) - parseInt(low);
     if (diff < smallest) {
       smallest = diff;     // record new smallest difference

@@ -9,6 +9,13 @@ var smallest = 9999, largest = 0;
 var num_small = num_large = 0;
 var name_small;
 
+// Constants
+var HIGH_VALUE = 1;
+var LOW_VALUE = 2;
+var FOR = 6;
+var AGAINST = 8;
+
+
 // Read in the weather data file, calculating results when read. 
 fs.readFile('weather.dat', 'utf8', function (err,data) {
   if (err) {
@@ -16,6 +23,7 @@ fs.readFile('weather.dat', 'utf8', function (err,data) {
   }
   var lines = split_lines (data);
   show_weather (lines);
+  ready = true;
 });
 
 
@@ -52,6 +60,7 @@ function show_weather (lines) {
   }
   console.log ("Lowest spread was day " + num_small + " with a temp diff of " + smallest);
   console.log ("Highest spread was day " + num_large + " with a temp diff of " + largest);
+  return;
 }  
 
 
@@ -71,20 +80,30 @@ function show_football (lines) {
     }
   }
   console.log ("Team with lowest spread of " + smallest + " points was " + name_small);
+  return;
 }  
 
 
+// 
+// Helper functions
+//
 
 function temp_diff (high, low) {
   return parseInt(high) - parseInt(low);
 }
 
+function get_scrubbed_value (vals, idx) {
+  return vals[idx].replace (/[!@#$%^&*]/g, '');
+}
+
 function get_high (vals) {
-  return vals[1].replace (/[!@#$%^&*]/g, '');
+  return get_scrubbed_value (vals, HIGH_VALUE);
+  //return vals[HIGH_VALUE].replace (/[!@#$%^&*]/g, '');
 }
 
 function get_low (vals) {
-  return vals[2].replace (/[!@#$%^&*]/g, '');
+  return get_scrubbed_value (vals, LOW_VALUE);
+  //return vals[LOW_VALUE].replace (/[!@#$%^&*]/g, '');
 }
 
 function split_lines (data) {
@@ -96,11 +115,11 @@ function split_fields (line) {
 }
 
 function get_for(vals) {
-  return vals[6];
+  return vals[FOR];
 }
 
 function get_against(vals) {
-  return vals[8];
+  return vals[AGAINST];
 }
 
 function point_diff (val_f, val_a) {

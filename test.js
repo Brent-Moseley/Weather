@@ -98,12 +98,10 @@ function get_scrubbed_value (vals, idx) {
 
 function get_high (vals) {
   return get_scrubbed_value (vals, HIGH_VALUE);
-  //return vals[HIGH_VALUE].replace (/[!@#$%^&*]/g, '');
 }
 
 function get_low (vals) {
   return get_scrubbed_value (vals, LOW_VALUE);
-  //return vals[LOW_VALUE].replace (/[!@#$%^&*]/g, '');
 }
 
 function split_lines (data) {
